@@ -1,19 +1,22 @@
-# WiFi-RC-Car
-I am repurposing an remote control (RC) car to deploy TensorFlow Lite so that it can follow another vehicle via computer vision. This project is that other vehicle.
+# Automated-Desktop
+I wrote this basic python script with the intent of refreshing myself in Python, and learning how to autonomously navigate various software programs with minimal LOC.
 
-This project is my transformation of the remote controlled chassis of the pursued car into a car remotely controlled over SSH by a Raspberry Pi 2. The initial python script was adpated from https://www.electronicshub.org/raspberry-pi-l298n-interface-tutorial-control-dc-motor-l298n-raspberry-pi/ for the sake of time, but then modified to meet the needs of this project.
+## The overhead view
 
-The RC car has two motors: one for steering, and one for driving. Thus, keyboard commands on the client computer must be able to control the forward/backward and left/right rotations for motor_1 and motor_2 respectively.
+When executed, this script will record your mouse movements and clicks. Once you click the middle scroll button on the mouse, it will stop recording, and save your mouse's recorded movements in another Python script that you can run any time in order to re-play your mouse's movements.
 
-Currently, the keys used are as follows:
+While rudimentary, this program is already capable of automatically enrolling me in my Engineering courses the moment enrollment opens.
 
-'l' for left.
-'s' for straight.
-'r' for right.
+## How it works
 
-'f' for forward.
-'b' for backward.
+This script utilizes the mouse library in Python to record the physical coordinates of the cursor every time a left or right click is made. It stores these movements and their associated click in a list, automatically filtering occurances where the same movement is repeated (as it records at such a speed that one mouse click may be recorded over ten times from the time it is pressed down to released).
 
-'h' to halt (stop) both motors.
-'e' to exit the script and clean up the GPIO pins
+Then, the program iterates through this list, creating a new Python file on your desktop and writing your mouse's behavior in Python within this new file.
 
+## Improvements
+
+There are a host of basic improvements that could be made:
+
+- Using the pyautogui library to enable additional features, such as reading text on the computer screen, and recording and operating letters and hotkeys which would open the door to greater versatility (i.e. the location of a program behavior on the screen is variable (like closing a tab on Google), but operating the same feature via a hotkey works indepenendent of program placement on the screen (ctl + w in this example))
+- Creating a GUI for the user when starting and ending the recording program, and for labelling the Python templates they create after recoring specific behavior
+- Recording the relative time associated with every key / button clicked, so that the computer can imitate the time between tasks. This is especially useful for opening programs or windows that require a few seconds to load
